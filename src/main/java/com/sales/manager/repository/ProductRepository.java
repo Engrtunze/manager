@@ -1,6 +1,7 @@
 package com.sales.manager.repository;
 
 import com.sales.manager.model.Product;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +13,6 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Product, UUID> {
     Optional<Product> findByNameAndPrice(String name, BigDecimal price);
     List<Product> findAllByProductQuantityGreaterThan(int quantity);
+
+    @NotNull Optional<Product> findById(@NotNull UUID id);
 }

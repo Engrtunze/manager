@@ -7,6 +7,7 @@ import com.sales.manager.model.Product;
 import com.sales.manager.repository.ProductRepository;
 import com.sales.manager.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,17 +20,29 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
+    public @NotNull Optional<Product> findById(UUID id) {
+        return productRepository.findById(id);
+
+    }
+
+    @Override
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    @Override
     public Product createProduct(CreateProductRequest createProductRequest) {
         Optional<Product> productName = productRepository.findByNameAndPrice(createProductRequest.getName(), createProductRequest.getPrice());
         if (productName.isPresent()) {
             throw new DuplicateRecordException(String.format("A product with the name %s and price %s exist already", createProductRequest.getName(), createProductRequest.getPrice()));
         }
 
-        var product = new Product();
-        product.setName(createProductRequest.getName());
-        product.setPrice(createProductRequest.getPrice());
-        product.setProductQuantity(createProductRequest.getProductQuantity());
-        product.setDescription(createProductRequest.getDescription());
+        var product = Product.builder()
+                .name(createProductRequest.getName())
+                .productQuantity(createProductRequest.getProductQuantity())
+                .description(createProductRequest.getDescription())
+                .price(createProductRequest.getPrice())
+                .build();
         return productRepository.save(product);
     }
 
