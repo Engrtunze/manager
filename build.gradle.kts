@@ -25,6 +25,7 @@ dependencies {
 	implementation("javax.validation:validation-api:2.0.1.Final")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.projectlombok:lombok:1.18.22")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
 	testImplementation("org.mockito:mockito-core:2.1.0")
 	testImplementation("junit:junit:4.13.1")
 	compileOnly("org.projectlombok:lombok:0.11.0")
