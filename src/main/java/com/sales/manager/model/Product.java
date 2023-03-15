@@ -18,10 +18,12 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "products")
 public class Product extends AbstractAuditable {
+    @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
     private String description;
-    @Column(name = "quantity_in_stock")
+    @Column(name = "quantity_in_stock", nullable = false)
     private int productQuantity;
 
 }
