@@ -86,8 +86,6 @@ public class OrderServiceImpl implements OrderService {
                     .build();
 
             orderDtos.add(orderDto);
-
-            //String orderJson = new ObjectMapper().writeValueAsString(orderDto);
             kafkaProducer.publishOrder(orderDto);
         }
 
