@@ -15,6 +15,7 @@ import com.sales.manager.service.OrderService;
 import com.sales.manager.service.ProductService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
+    @SneakyThrows
     public List<OrderDto> placeOrder(OrderRequest request) {
         var customer = Customer.builder()
                 .customerPhoneNumber(request.getCustomerDetailsRequest().getCustomerPhoneNumber())
@@ -85,6 +87,7 @@ public class OrderServiceImpl implements OrderService {
 
             orderDtos.add(orderDto);
 
+            //String orderJson = new ObjectMapper().writeValueAsString(orderDto);
             kafkaProducer.publishOrder(orderDto);
         }
 
