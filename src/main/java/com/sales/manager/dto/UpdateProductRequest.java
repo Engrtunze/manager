@@ -2,13 +2,10 @@ package com.sales.manager.dto;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 
 @Data
-public class CreateProductRequest {
+public class UpdateProductRequest {
     private String name;
-    private BigDecimal currentPrice;
     private String description;
     private int productQuantity;
 }

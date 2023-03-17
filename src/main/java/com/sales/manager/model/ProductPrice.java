@@ -21,16 +21,13 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @Builder
-@Table(name = "orders")
-public class Order extends AbstractAuditable {
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-    private BigDecimal unitPriceAtOrder;
-    private BigDecimal totalUnitPriceAtOrder;
+@Table(name = "product_price")
+public class ProductPrice extends AbstractAuditable {
+    @Column(name = "current_price", nullable = false)
+    private BigDecimal currentPrice;
+    private BigDecimal latestPrice;
+    private BigDecimal oldPrice;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
 }
